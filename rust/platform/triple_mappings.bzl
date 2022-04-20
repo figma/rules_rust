@@ -32,6 +32,7 @@ SUPPORTED_T2_PLATFORM_TRIPLES = [
     "i686-unknown-freebsd",
     "powerpc-unknown-linux-gnu",
     "s390x-unknown-linux-gnu",
+    "wasm32-unknown-emscripten",
     "wasm32-unknown-unknown",
     "wasm32-wasi",
     "x86_64-apple-ios",
@@ -109,7 +110,7 @@ _SYSTEM_TO_STATICLIB_EXT = {
     "android": ".a",
     "darwin": ".a",
     "eabi": ".a",
-    "emscripten": ".js",
+    "emscripten": ".a",
     "freebsd": ".a",
     "ios": ".a",
     "linux": ".a",
@@ -293,6 +294,11 @@ def triple_to_constraint_set(target_triple):
         return [
             "@rules_rust//rust/platform/cpu:wasm32",
             "@rules_rust//rust/platform/os:unknown",
+        ]
+    if target_triple == "wasm32-unknown-emscripten":
+        return [
+            "@platforms//cpu:wasm32",
+            "@emsdk//:os_emscripten",
         ]
 
     triple_struct = triple(target_triple)

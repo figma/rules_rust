@@ -72,6 +72,14 @@ def declare_config_settings():
         ],
     )
 
+#    native.platform(
+#        name = "wasm_emscripten",
+#        constraint_values = [
+#            str(Label("//rust/platform/cpu:wasm32")),
+#            str(Label("//rust/platform/os:emscripten")),
+#        ],
+#    )
+
     native.platform(
         name = "wasi",
         constraint_values = [

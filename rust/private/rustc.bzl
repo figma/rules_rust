@@ -1297,8 +1297,8 @@ def rustc_compile_action(
     else:
         providers.extend([crate_info, dep_info])
 
-    if toolchain.target_arch != "wasm32":
-        providers += establish_cc_info(ctx, attr, crate_info, toolchain, cc_toolchain, feature_configuration, interface_library)
+#    if toolchain.target_arch != "wasm32":
+    providers += establish_cc_info(ctx, attr, crate_info, toolchain, cc_toolchain, feature_configuration, interface_library)
     if pdb_file:
         providers.append(OutputGroupInfo(pdb_file = depset([pdb_file])))
     if dsym_folder:
