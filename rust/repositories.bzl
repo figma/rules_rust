@@ -608,7 +608,6 @@ def rust_repository_set(
     # Register toolchains
     if register_toolchain:
         native.register_toolchains(*all_toolchain_names)
-        native.register_toolchains(str(Label("//rust/private/dummy_cc_toolchain:dummy_cc_wasm32_toolchain")))
 
     # Inform users that they should be using the canonical name if it's not detected
     if "rules_rust" not in native.existing_rules():
